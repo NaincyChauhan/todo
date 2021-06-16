@@ -1,0 +1,11 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    /* background-color: red; */
+}
+.nom{
+    margin-left: 12px;
+}
+.white{
+    color: white;
+}

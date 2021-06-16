@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'todo/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'todo/css/style.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center mt-4 mb-2">Add Your Data Here👇😀🙂</h2><br>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div class="col-sm-5">
+                        <form action="" method="POST" class="form-inline">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <input type="submit" class="btn btn-success" value="Add">
+                        </form><br><br>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table ">
+                <tbody>
+                    {% if posts %}
+                    {% for post in posts %}
+                    <tr>
+                        <th scope="row">{{post.id}}</th>
+                        <td>{{post.title}}<br>
+                            <small>{{post.date}}</small>
+                        </td>
+                        <td class="text-right"><a href="{% url 'update' post.id %}"><button type="submit" class="btn btn-warning btn-sm  nom">Edit</button></a>
+                            <form action="{% url 'delete' post.id %}" method="POST" class="d-inline">
+                                {% csrf_token %} 
+                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
